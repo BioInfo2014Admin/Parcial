@@ -1,4 +1,4 @@
 Parcial
 =======
 
-This is a group test project for the subject Bioinformatics, from Agrobiotechnologic Engineering of San Martin National University, Argentina (UNSAM).
+This is a group test of Bioinformatics, made by students from Agrobiotechnologic Engineering of National University of San Martin (UNSAM), Argentina.
