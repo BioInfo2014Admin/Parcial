@@ -38,10 +38,9 @@ def _Selecciondezonas(Inputfasta, Inseleccion=None):
     """
     import numpy as np
     import pandas as pd
-    from Bio import SeqIO
-    Lista=[]
     Arrayalineamiento=_Recepcion(Inputfasta)
     if Inseleccion != None:
+        Lista=[]
         Arrayseleccion=np.zeros((len(Arrayalineamiento),0))
         for i in range(0,len(Inseleccion)):
             Arrayseleccion=np.hstack([Arrayseleccion, Arrayalineamiento[:,Inseleccion[i][0]:Inseleccion[i][1]]])
