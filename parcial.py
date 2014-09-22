@@ -26,6 +26,11 @@ def parcial(dirseq="",formatseq="fasta",protalign=True,outputformat="fasta",outp
 #transformamos al formato deseado por el user
     matrizfinal = tooutputformat(matrizlimpia)
 
+    with open(str(outputname), "w") as archivofinal:
+        archivofinal.write(matrizfinal)
+    if protalign == True:
+        with open(str(outprotalign),"w") as palfinal:
+            palfinal.write(alineamientoproteina)            
             
         
         
