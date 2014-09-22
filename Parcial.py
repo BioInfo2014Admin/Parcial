@@ -3,28 +3,28 @@ Parcial
 
 """
 
-def parcial(dirseq="",formatseq="fasta",protalign=True,outputformat="fasta",outputname="parcial"):
+def parcial(dirseq="",formatseq="fasta",protalign=True,outputformat="fasta",outputname="parcial",tupla=""):
     """ aca van los ejemplos
     """
     import tofasta
-    import cortar
+    import Selectingbyzones
     import limpiezagaps
     import limpiezastops
     import alinprot
-    import tooutputformat
+    import outfile
 #primero transformamos el input a fasta
-    seq = tofasta(dirseq)
+    seq = _tofasta(dirseq)
 #enviamos al modulo que lo corta
-    matriz = cortar(seq)
+    matriz = _zoneselector(seq,tupla)
 #enviamos al modulo que limpia gaps
-    matrizsingaps = limpiezagaps(matriz)
+    matrizsingaps = _limpiezagaps(matriz)
 #enviamos al modulo que limpia stops
-    matrizlimpia = limpiezastops(matriz)
+    matrizlimpia = _limpiezastops(matriz)
 #cuando corresponda, generamos el alineamiento de proteinas
     if protalign == True:
-        alineamientoproteina = alinprot(matrizlimpia)
+        alineamientoproteina = _alinprot(matrizlimpia)
 #transformamos al formato deseado por el user
-    matrizfinal = tooutputformat(matrizlimpia)
+    matrizfinal = _outfile(matrizlimpia,outputname,outputformat)
 
     with open(str(outputname), "w") as archivofinal:
         archivofinal.write(matrizfinal)
@@ -47,5 +47,6 @@ if __name__ == "__main__":
     parser.add_argument('-protalign', action='store_const', const = True, default = False, help='if True will return cleaned protein aligment ')
     parser.add_argument('-outputformat', type=str, help='output format',default = "fasta")
     parser.add_argument('-outputname', type=str, help='output name', default = "parcial")
+    parser.add_argument('-tupla', type=tuple, help='lista de tuplas que contiene las zonas de interes',default="")
     args = parser.parse_args()
-    print(parcial(args.seqdir,args.formatseq,args.protalign,args.outputformat,args.outputname))
+    print(parcial(args.seqdir,args.formatseq,args.protalign,args.outputformat,args.outputname,args.tupla))
