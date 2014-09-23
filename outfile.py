@@ -27,18 +27,18 @@ def _outfile(m, n, f):
     if f=="fasta":
         for i in range(0,len(m)):
             seq_list = m[i].tolist()
-            S = ""
-            R = S.join(seq_list)
-            Seq1 = Bio.Seq.Seq(R)
+            s = ""
+            r = s.join(seq_list)
+            Seq1 = Bio.Seq.Seq(r)
             print(">"+ID[i]+"\n"+Seq1)
             
     elif f=="phylip":
         print(str(len(m))+" "+str(len(m[0])))
         for i in range (0,len(m)):
             seq_list = m[i].tolist()
-            S = ""
-            R = S.join(seq_list)
-            Seq1 = Bio.Seq.Seq(R)
+            s = ""
+            r = s.join(seq_list)
+            Seq1 = Bio.Seq.Seq(r)
             print(ID[i]+" "+Seq1)
     else:
         raise Exception("Wrong format. Choose accepted format.")
