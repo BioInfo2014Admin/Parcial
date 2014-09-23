@@ -7,7 +7,7 @@ The second way is introducing a list of tuples as an argument.
 
 """
 
-def parcial(dirseq="",formatseq="fasta",protalign=True,outputformat="fasta",outputname="parcial",tupla=""):
+def parcial(dirseq="",formatseq="fasta",protalign=True,outputformat="fasta",outputname="parcial",tupla="",outputnamealign="aligment",outputformatalign="fasta"):
     """ aca van los ejemplos
     """
     import tofasta
@@ -17,24 +17,22 @@ def parcial(dirseq="",formatseq="fasta",protalign=True,outputformat="fasta",outp
     import alinprot
     import outfile
 #primero transformamos el input a fasta
-    seq = _tofasta(dirseq)
+    array = _tofasta(dirseq)
 #enviamos al modulo que lo corta
-    matriz = _zoneselector(seq,tupla)
+    interestarray = _zoneselector(array,tupla)
 #enviamos al modulo que limpia gaps
-    matrizsingaps = _limpiezagaps(matriz)
+    nogapsarray = _limpiezagaps(interestarray)
 #enviamos al modulo que limpia stops
-    matrizlimpia = _limpiezastops(matriz)
+    finalarray = _limpiezastops(nogapsarray)
 #cuando corresponda, generamos el alineamiento de proteinas
     if protalign == True:
-        alineamientoproteina = _alinprot(matrizlimpia)
-#transformamos al formato deseado por el user
-    matrizfinal = _outfile(matrizlimpia,outputname,outputformat)
+        arrayprotalign = _alinprot(finalarray)
+#transformamos al formato deseado por el user y lo enviamos a un archivo.
+    _outfile(matrizlimpia,outputname,outputformat)
 
-    with open(str(outputname), "w") as archivofinal:
-        archivofinal.write(matrizfinal)
     if protalign == True:
-        with open(str(outprotalign),"w") as palfinal:
-            palfinal.write(alineamientoproteina)            
+    	_outfile(arrayprotalign,outputnamealign,outputformatalign)
+               
             
         
         
@@ -44,13 +42,17 @@ def parcial(dirseq="",formatseq="fasta",protalign=True,outputformat="fasta",outp
 if __name__ == "__main__":
     import argparse
 #estos sos los argumentos que cargara el programa
-#falta sacarle el print aca nada mas.
+
     parser = argparse.ArgumentParser(description='ACA VA LA DESCRIPCION DEL PROGRAMA')
     parser.add_argument('-seqdir',  type=str, help='input name')
     parser.add_argument('-formatseq', type=str, help='input format',default = "fasta")
     parser.add_argument('-protalign', action='store_const', const = True, default = False, help='if True will return cleaned protein aligment ')
     parser.add_argument('-outputformat', type=str, help='output format',default = "fasta")
+    parser.add_argument('-outputformatalign', type=str, help='output format fot the protein aligment',default = "fasta")
     parser.add_argument('-outputname', type=str, help='output name', default = "parcial")
+    parser.add_argument('-outputnamealign', type=str, help='output name for the protein aligment', default = "aligment")
     parser.add_argument('-tupla', type=tuple, help='lista de tuplas que contiene las zonas de interes',default="")
+#esto carga los argumentos en una variable    
     args = parser.parse_args()
-    print(parcial(args.seqdir,args.formatseq,args.protalign,args.outputformat,args.outputname,args.tupla))
+#esto envia los argumentos a la funcion parcial, coimo argumentos para la funcion.    
+    parcial(args.seqdir,args.formatseq,args.protalign,args.outputformat,args.outputname,args.tupla,args.outputnamealign,args.outputformatalign)
