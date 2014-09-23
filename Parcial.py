@@ -45,10 +45,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='ACA VA LA DESCRIPCION DEL PROGRAMA')
     parser.add_argument('-seqdir',  type=str, help='input name')
-    parser.add_argument('-formatseq', type=str, help='input format',default = "fasta")
     parser.add_argument('-protalign', action='store_const', const = True, default = False, help='if True will return cleaned protein aligment ')
-    parser.add_argument('-outputformat', type=str, help='output format',default = "fasta")
-    parser.add_argument('-outputformatalign', type=str, help='output format fot the protein aligment',default = "fasta")
     parser.add_argument('-outputname', type=str, help='output name', default = "parcial")
     parser.add_argument('-outputnamealign', type=str, help='output name for the protein aligment', default = "aligment")
     parser.add_argument('-tupla', type=tuple, help='lista de tuplas que contiene las zonas de interes',default="")
