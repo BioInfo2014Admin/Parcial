@@ -13,25 +13,25 @@ def parcial(dirseq="",protalign=True,outputname="parcial",tupla="",outputnameali
     import Infile
     import Selectingbyzones
     import limpiezagaps
-    import limpiezastops
-    import aligngproteins
+    import removestops
+    import alignproteins
     import outfile
 #primero transformamos el input a fasta
-    array = _input(dirseq)
+    array =Infile._input(dirseq)
 #enviamos al modulo que lo corta
-    interestarray = _zoneselector(array,tupla)
+    interestarray = Selectingbyzones._zoneselector(array,tupla)
 #enviamos al modulo que limpia gaps
-    nogapsarray = _limpiezagaps(interestarray)
+    nogapsarray = limpiezagaps._limpiezagaps(interestarray)
 #enviamos al modulo que limpia stops
-    finalarray = _limpiezastops(nogapsarray)
+    finalarray = removestops._remove_stops(nogapsarray)
 #cuando corresponda, generamos el alineamiento de proteinas
     if protalign == True:
-        arrayprotalign = _alinprot(finalarray)
+        arrayprotalign = alignproteins._alinprot(finalarray)
 #transformamos al formato deseado por el user y lo enviamos a un archivo.
-    _outfile(matrizlimpia,outputname,outputformat)
+    outfile._outfile(matrizlimpia,outputname,outputformat)
 
     if protalign == True:
-    	_outfile(arrayprotalign,outputnamealign,outputformatalign)
+    	outfile._outfile(arrayprotalign,outputnamealign,outputformatalign)
                
             
         
@@ -52,4 +52,4 @@ if __name__ == "__main__":
 #esto carga los argumentos en una variable    
     args = parser.parse_args()
 #esto envia los argumentos a la funcion parcial, coimo argumentos para la funcion.    
-    parcial(args.seqdir,args.formatseq,args.protalign,args.outputformat,args.outputname,args.tupla,args.outputnamealign,args.outputformatalign)
+    parcial(args.seqdir,args.protalign,args.outputname,args.tupla,args.outputnamealign)
