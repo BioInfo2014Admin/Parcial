@@ -1,9 +1,10 @@
 import sys
 import numpy as np
-from Bio import SeqIO
 import Bio
+from Bio import SeqIO
+import os
 
-def _outfile(m, n, f):
+def _outfile(m, n):
     
     """The function returns the alignments in a file with selected name and format.
     
@@ -12,19 +13,21 @@ def _outfile(m, n, f):
     
     Arguments:
     -m- alignment matrix 
-    -n- the name of the file
-    -f- the file format
+    -n- the name of the output file
     
     Example:
     >>>import sys
     >>>import numpy as np
     >>>import Bio
     >>>from Bio import SeqIO
-    >>>outfile(matrix,"example.fasta","fasta")"""
+    >>>import os
+    >>>outfile(matrix,"example.fasta")"""
     
     sys.stdout = open (n, "w")
     
-    if f=="fasta":
+    fileName, fileExtension = os.path.splitext(n)
+    
+    if fileExtension == ".fasta":
         for i in range(0,len(m)):
             seq_list = m[i].tolist()
             s = ""
@@ -32,7 +35,7 @@ def _outfile(m, n, f):
             Seq1 = Bio.Seq.Seq(r)
             print(">"+ID[i]+"\n"+Seq1)
             
-    elif f=="phylip":
+    elif fileExtension == ".phylip":
         print(str(len(m))+" "+str(len(m[0])))
         for i in range (0,len(m)):
             seq_list = m[i].tolist()
