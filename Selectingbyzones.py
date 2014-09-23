@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 #Hola, la primer función es necesaria para la segunda, y probablemente les sirva a ustedes.
 #
 #
