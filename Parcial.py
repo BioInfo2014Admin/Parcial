@@ -10,14 +10,14 @@ The second way is introducing a list of tuples as an argument.
 def parcial(dirseq="",formatseq="fasta",protalign=True,outputformat="fasta",outputname="parcial",tupla="",outputnamealign="aligment",outputformatalign="fasta"):
     """ aca van los ejemplos
     """
-    import tofasta
+    import Infile
     import Selectingbyzones
     import limpiezagaps
     import limpiezastops
-    import alinprot
+    import aligngproteins
     import outfile
 #primero transformamos el input a fasta
-    array = _tofasta(dirseq)
+    array = _input(dirseq)
 #enviamos al modulo que lo corta
     interestarray = _zoneselector(array,tupla)
 #enviamos al modulo que limpia gaps
