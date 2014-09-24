@@ -24,6 +24,8 @@ def _zoneselector(input_array, tuple_selection=None, selection_01=None):
         handle=open(selection_01,"r")
         zero_ones=[i for i in handle.read()]
         handle.close
+        tr01=[0]
+        tr10=[0]
         for i in range(0,len(zero_ones)-1):
             try:
                 r=int(zero_ones[i])
@@ -31,6 +33,14 @@ def _zoneselector(input_array, tuple_selection=None, selection_01=None):
                 raise Exception("'selection_01' file can only contain 0 or 1")
             if r!=0 and r!=1:
                 raise Exception("'selection_01' file can only contain 0 or 1")
+            if zero_ones[i]+zero_ones[i+1]=="01":
+                tr01.append(i+1)
+            elif zero_ones[i]+zero_ones[i+1]=="10":
+                tr10.append(i+1)
+        for i in range(0,len(tr01)):
+            for j in range(0,len(tr10)):
+                if (tr01[i]-tr10[j])%3!=0:
+                    raise Exception("Warning, your zero-one selection affects the reading frame")
         columns_to_delete=[]
         for i in range(0, len(zero_ones)):
             auxlist1=[j for j, r in enumerate(zero_ones) if r=="0"]
