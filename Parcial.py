@@ -1,8 +1,9 @@
+# -*- coding: utf-8 -*-
 """
 This function cleans a codon alignment, removes gaps, stops codons and allows user to select an output name. 
-Input format must be fasta or phylip alignment sequences. User can also choose to generate a protein alignment. 
+Input format must be "fasta" or "phylip" alignment sequences. User can also choose to generate a protein alignment. 
 The function also selects zones to keep and zones to eliminate. There are two ways for the user to do that. 
-The first way is introducing a sequence of 0 and 1 into the input file. 
+The first way is introducing a sequence of "0" and "1" into the input file. 
 The second way is introducing a list of tuples as an argument.
 
 """
