@@ -1,6 +1,6 @@
 def _ID(a):
 
-    """The function saves ids in list.
+    """The function saves ids in a list.
     
     Arguments:
     -a- alignment file
