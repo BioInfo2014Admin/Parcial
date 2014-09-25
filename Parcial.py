@@ -1,35 +1,36 @@
 # -*- coding: utf-8 -*-
-"""
-This function cleans a codon alignment , removes gaps, stops codons and allows user to select an output name. 
-Input format must be "fasta" or "phylip" alignment sequences. User can also choose to generate a protein alignment. 
-The funtion has two options to remove stops codons, the first directly remove all the secuences with premature codons (-stops c) and the other remove all the secuence after the stop codon (-stops -d). By default the funtion dont remove the stop codons.  
-The function also selects zones to keep and zones to eliminate. There are two ways for the user to do that. 
-The first way is introducing a sequence of "0" and "1" into the input file. 
-The second way is introducing a list of tuples as an argument.
--seqdir sequence (eg. ejemplo.fasta)
--protalign 
--outputname name (eg. result.fasta)
--tupla (list of tuples) (eg. [(0,3),(12,33),(933,1032)]
--outputnamealign name (eg. result2.fasta)
--codon_table ID (eg. 1)
--stops (-d or -c) 
-(eg. python Parcial.py -seqdir ejemplo.fasta -outputname pruebajodida32.fasta -stops d)
 
-"""
+def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary,stops):
 
-def parcial(dirseq,protalign,outputname,tupla,outputnamealign,codon_table,binary,stops):
-#aca generamos los doctest
-    """
-    >>> parcial("ejemplo.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,None)
-    >>> parcial("ejemplo.fasta",True,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,None)
-    >>> parcial("ejemplo.fasta",False,"alineamiento.fasta",[(0,9),(27,30)],"alineamientoprot.fasta",1,None,None)
-    >>> parcial("ejemplo.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,"binary.txt",None)
-    >>> parcial("ejemplo.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,"c")
-    >>> parcial("ejemplo.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,"d")
-    >>> parcial("ejemplo.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,"cd")
-    Exception: wrong argument -stops: it should be c or d, instead it was cd 
-    """
-#no me sale hacer un doctest que espere un error
+	"""This function cleans codon alignments by gaps and stop codons removal, allowing
+	the user to select zones, generate a protein alignment and select output name and
+	format. 
+
+	Input file must be .fasta or .phylip alignment sequences. The function has two
+	options to remove stops codons, the first one directly remove all the secuences 
+	with premature codons and the other remove all the secuence after the first stop
+	codon found. By default the funtion doesn't remove stop codons. The function also
+	has two ways to selects zones to keep and zones to eliminate . The first one is
+	introducing a sequence of "0" and "1" into the input file. The second way is 
+	introducing a list of tuples as an argument.
+
+	Arguments:
+	-seqdir- alignment file 
+	-protalign- protein alignment
+	-outputname- exit file name
+	-tupla- list of tuples for zone selection
+	-outputnamealign- protein alignment file name
+	-codon_table- genetic code number (http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi)
+	-stops- c or d. c removes all sequences with premature codons. d removes the nucleotides in
+	 all sequences found after the first stop codon.
+
+	>>> parcial("ejemplo.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,None)
+	>>> parcial("ejemplo.fasta",True,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,None)
+	>>> parcial("ejemplo.fasta",False,"alineamiento.fasta",[(0,9),(27,30)],"alineamientoprot.fasta",1,None,None)
+	>>> parcial("ejemplo.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,"binary.txt",None)
+	>>> parcial("ejemplo.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,"c")
+	>>> parcial("ejemplo.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,"d")"""
+
 
 #aca importamos los todos los modulos
     import Infile
@@ -43,9 +44,9 @@ def parcial(dirseq,protalign,outputname,tupla,outputnamealign,codon_table,binary
     if stops == "d" or stops == "c" or stops == None:
         pass
     else:
-        raise Exception("wrong argument -stops: it should be c or d, instead it was "+str(stops))   
-    ID = ID._ID(dirseq)
-    array =Infile._input(dirseq)
+        raise Exception("Wrong argument -stops: it should be c or d, instead it was "+str(stops))   
+    ID = ID._ID(seqdir)
+    array =Infile._input(seqdir)
 #enviamos al modulo que lo corta
     
     interestarray = Selectingbyzones._zoneselector(array,tupla,binary)
