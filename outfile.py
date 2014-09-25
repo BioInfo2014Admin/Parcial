@@ -4,7 +4,7 @@ import Bio
 from Bio import SeqIO
 import os
 
-def _outfile(m, n):
+def _outfile(m, n, ID):
     
     """The function returns the alignments in a file with selected name and format.
     
@@ -14,6 +14,7 @@ def _outfile(m, n):
     Arguments:
     -m- alignment matrix 
     -n- the name of the output file
+    -ID- a list containing the aligned sequences IDs.
     
     Example:
     >>>import sys
@@ -21,7 +22,7 @@ def _outfile(m, n):
     >>>import Bio
     >>>from Bio import SeqIO
     >>>import os
-    >>>outfile(matrix,"example.fasta")"""
+    >>>outfile(matrix,"example.fasta",ID)"""
     
     sys.stdout = open (n, "w")
     
