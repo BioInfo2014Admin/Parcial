@@ -1,7 +1,7 @@
 def _remove_stops2(matrix,codontable_number):
     """
 
-Docstring
+ Docstring
 
     """
     import numpy as np
