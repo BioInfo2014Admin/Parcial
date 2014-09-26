@@ -28,7 +28,10 @@ def _Alignproteins(NM,codtable):
         array([['T', 'A', 'R'],
              ['W', 'T', 'R']], 
               dtype='|S1')
+    
         """
+    import Bio
+    from Bio.Seq import Seq
     from Bio.Data import CodonTable
     import numpy as np
     CodonTable.unambiguous_dna_by_id[codtable]
