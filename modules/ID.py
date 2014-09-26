@@ -1,3 +1,7 @@
+import os
+import numpy as np
+from Bio import AlignIO
+
 def _ID(a):
 
     """The function saves ids in a list.
@@ -6,10 +10,10 @@ def _ID(a):
     -a- alignment file
     
     Example:
-    >>>import os
-    >>>import numpy as np
-    >>>from Bio import AlignIO
-    >>>_ID("example.fasta")"""
+    >>> import os
+    >>> import numpy as np
+    >>> from Bio import AlignIO
+    >>> _ID("example.fasta")"""
         
     fileName, fileExtension = os.path.splitext(a)
     
