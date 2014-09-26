@@ -40,31 +40,47 @@ def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary
     import alignproteins
     import outfile
     import ID
-#primero transformamos el input a una matriz
+    
+if type(tupla) == list or tupla == None:
+        pass
+    else:
+	raise Exception("wrong argument -tupla: it should be for example [(0,3),(9,12)] , instead it was "+str(tupla))
+    if binary == None or "." in binary:
+	pass
+    else:
+        raise Exception("wrong argument -binary: it should be name.txt , instead it was "+str(binary)) 
+
+    if type(codon_table) == int:
+        pass
+    else:
+        raise Exception("wrong argument -codon_table: it should be 1,2,3,4,5,6,7,8,9,10 or 11, instead it was "+str(codon_table)) 
+
+
     if stops == "d" or stops == "c" or stops == None:
         pass
     else:
-        raise Exception("Wrong argument -stops: it should be c or d, instead it was "+str(stops))   
+        raise Exception("wrong argument -stops: it should be c or d, instead it was "+str(stops))   
     ID = ID._ID(seqdir)
     array =Infile._input(seqdir)
 #enviamos al modulo que lo corta
     
     interestarray = Selectingbyzones._zoneselector(array,tupla,binary)
+    
 #enviamos al modulo que limpia gaps
     
-    nogapsarray = limpiezagaps._limpiezagaps(interestarray)
+    nogapsarray = gap_cleaner._gap_cleaner(interestarray)
 #enviamos al modulo que limpia stops
     final = removestops._remove_stops(nogapsarray,codon_table,ID,stops)
 #cuando corresponda, generamos el alineamiento de proteinas
     if protalign == True:
-        arrayprotalign = alignproteins._alignproteins(final[0],codon_table)
+        arrayprotalign = alignproteins._alignproteins(final[0],codon_table)   
 
 #transformamos al formato deseado por el user y lo enviamos a un archivo.
-
+    
     outfile._outfile(final[0],outputname,final[1])
 
     if protalign == True:
-    	outfile._outfile(arrayprotalign,outputnamealign)
+    	outfile._outfile(arrayprotalign,outputnamealign,final[1])
                
             
         
