@@ -7,6 +7,8 @@ Finally, it removes the rows that appear in the list.
 Argument:
 -matrix- nucleotide matrix from alignment
 
+
+Example:
 >>> gap_cleaner (['A' 'C' 'C' 'A' 'G' 'T' 'T' 'G' 'C' 'A' 'T' 'T']
  ['A' 'C' 'C' '-' '-' '-' 'T' 'G' 'C' 'A' 'A' 'T']
  ['A' 'C' 'C' 'A' 'G' 'T' '-' '-' '-' 'A' 'A' 'T']
