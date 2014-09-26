@@ -1,4 +1,4 @@
-def gap_cleaner(matrix):
+def _gap_cleaner(matrix):
     
     """ This function removes gaps from nucleotide matrix.
 It walks through the sequences reading codons and if it finds a gap it adds the row number into a list.
@@ -19,6 +19,7 @@ Argument:
 
 """
     
+    import numpy as np
     gap_list = []
                
     for j in range(0,len(matrix)):
