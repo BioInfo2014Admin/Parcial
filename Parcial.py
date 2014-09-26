@@ -2,7 +2,7 @@
 
 def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary,stops):
 
-	"""This function cleans codon alignments by gaps and stop codons removal, allowing
+    """This function cleans codon alignments by gaps and stop codons removal, allowing
 	the user to select zones, generate a protein alignment and select output name and
 	format. 
 
@@ -24,24 +24,24 @@ def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary
 	-stops- c or d. c removes all sequences with premature codons. d removes the nucleotides in
 	 all sequences found after the first stop codon.
 
-	>>> parcial("ejemplo.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,None)
-	>>> parcial("ejemplo.fasta",True,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,None)
-	>>> parcial("ejemplo.fasta",False,"alineamiento.fasta",[(0,9),(27,30)],"alineamientoprot.fasta",1,None,None)
-	>>> parcial("ejemplo.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,"binary.txt",None)
-	>>> parcial("ejemplo.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,"c")
-	>>> parcial("ejemplo.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,"d")"""
+	>>> parcial("./examples/example.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,None)
+	>>> parcial("./examples/example.fasta",True,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,None)
+	>>> parcial("./examples/example.fasta",False,"alineamiento.fasta",[(0,9),(27,30)],"alineamientoprot.fasta",1,None,None)
+	>>> parcial("./examples/example.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,"./examples/binary.txt",None)
+	>>> parcial("./examples/example.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,"c")
+	>>> parcial("./examples/example.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,"d")"""
 
 
 #aca importamos los todos los modulos
-    import Infile
-    import Selectingbyzones
-    import limpiezagaps
-    import removestops
-    import alignproteins
-    import outfile
-    import ID
+    from modules import Infile
+    from modules import Selectingbyzones
+    from modules import gap_cleaner
+    from modules import removestops
+    from modules import alignproteins
+    from modules import outfile
+    from modules import ID
     
-if type(tupla) == list or tupla == None:
+    if type(tupla) == list or tupla == None:
         pass
     else:
 	raise Exception("wrong argument -tupla: it should be for example [(0,3),(9,12)] , instead it was "+str(tupla))
@@ -73,7 +73,7 @@ if type(tupla) == list or tupla == None:
     final = removestops._remove_stops(nogapsarray,codon_table,ID,stops)
 #cuando corresponda, generamos el alineamiento de proteinas
     if protalign == True:
-        arrayprotalign = alignproteins._alignproteins(final[0],codon_table)   
+        arrayprotalign = alignproteins._Alignproteins(final[0],codon_table)   
 
 #transformamos al formato deseado por el user y lo enviamos a un archivo.
     
