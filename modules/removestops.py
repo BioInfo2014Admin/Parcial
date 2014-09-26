@@ -47,6 +47,7 @@ matrix_without_stops( ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A
             else:
                 pass
         counter = 0
+    ID.pop(seqs_to_delete)
     matrix_without_stops = np.delete(matrix,seqs_to_delete,0)
     return (matrix_without_stops,ID)
     
