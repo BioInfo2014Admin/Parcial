@@ -5,19 +5,19 @@ def _gap_cleaner(matrix):
     Finally, it removes the rows that appear in the list.
     
     Argument:
-    -matrix- nucleotide matrix from alignment
+    -matrix- codon alignment matrix
     
-    
+    Example:
     >>> arr1=np.array([['A', 'C', 'C', 'A', 'G', 'T', 'T', 'G', 'C', 'A', 'T', 'T'],
-                   ['A', 'C', 'C', '-', '-', '-', 'T', 'G', 'C', 'A', 'A', 'T'],
-              	   ['A', 'C', 'C', 'A', 'G', 'T', '-', '-', '-', 'A', 'A', 'T'],
-                   ['A', 'C', 'C', '-', '-', '-', '-', '-', '-', 'A', 'A', 'T']])
->>> _gap_cleaner (arr1)
-array([['A', 'C', 'C', 'A', 'T', 'T'],
-       ['A', 'C', 'C', 'A', 'A', 'T'],
-       ['A', 'C', 'C', 'A', 'A', 'T'],
-       ['A', 'C', 'C', 'A', 'A', 'T']], 
-      dtype='|S1')
+                       ['A', 'C', 'C', '-', '-', '-', 'T', 'G', 'C', 'A', 'A', 'T'],
+              	       ['A', 'C', 'C', 'A', 'G', 'T', '-', '-', '-', 'A', 'A', 'T'],
+                       ['A', 'C', 'C', '-', '-', '-', '-', '-', '-', 'A', 'A', 'T']])
+    >>> _gap_cleaner (arr1)
+    array([['A', 'C', 'C', 'A', 'T', 'T'],
+           ['A', 'C', 'C', 'A', 'A', 'T'],
+           ['A', 'C', 'C', 'A', 'A', 'T'],
+           ['A', 'C', 'C', 'A', 'A', 'T']], 
+          dtype='|S1')
 
     """
     
