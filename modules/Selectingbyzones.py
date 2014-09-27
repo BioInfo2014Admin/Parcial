@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 def _zoneselector(input_array, tuple_selection=None, selection_01=None):
     """
-      The function receive an array and a selection of the zones of interest that want to be maintained in
+    The function receive an array and a selection of the zones of interest that want to be maintained in
     the output array of this algorithm. The selection can be made via tuple-selection or zero-one selection.
     
     Arguments:
@@ -40,7 +40,7 @@ def _zoneselector(input_array, tuple_selection=None, selection_01=None):
            ['G', 'T', 'A']], 
           dtype='|S1')
 
-    If your selection affects the reading frame, the program will let you know and will ask you wheter to continue or not.
+    If your selection affects the reading frame, the program will let you know and will ask you whether to continue or not.
     
     .>> _zoneselector(arr,[(0,2)])
     Warning, your tuple selection affects the reading frame
@@ -120,7 +120,7 @@ def _zoneselector(input_array, tuple_selection=None, selection_01=None):
                 if (tr01[i]-tr10[j])%3!=0:
                     flag="error"
         if flag=="error":
-            print("Warning, your tuple zero-one selection affects the reading frame"+"\n"+"Continue anyways?[Y/N]")
+            print("Warning, your tuple zero-one selection affects the reading frame"+"\n"+"Continue anyway?[Y/N]")
             ans=""
             while ans!="Y":
                 ans=input()
