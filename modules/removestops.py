@@ -1,26 +1,31 @@
 def _remove_stops(matrix,codontable_number,ID,stops):
     """
 
-This function removes sequences with premature stops from nucleotide matrix.
-It walks through the sequences reading codons and if it finds more than one stop codon it adds the row number into a list.
-Finally, it removes the rows that appear in the list.
+    This function removes sequences with premature stops from nucleotide matrix.
+    It walks through the sequences reading codons and if it finds more than 
+    one stop codon it adds the row number into a list.
+    Finally, it removes the rows that appear in the list.
 
-Argument:
--matrix- nucleotide matrix from aligned sequences
--codontable_number- genetic code id from NCBI
+    Argument:
+    -matrix- nucleotide matrix from aligned sequences
+    -codontable_number- Codon Table from IUPAC
+    -ID- genetic code id from NCBI
+    -stops- stop codons 
+    Example:
 
-Example:
-
->>> arr = np.array([["T","G","A","A","A","A","A","A","A","T","G","A"], ["A","A","A","A","A","A","T","G","A","A","A","A"], ["A","A","A","A","A","A","T","G","A","A","A","A"], ["T","G","A","A","A","A","T","G","A","A","A","A"]])
->>> arr
-array([['T', 'G', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A'],
-       ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A'],
-       ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A'],
-       ['T', 'G', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A']], 
-      dtype='|S1')
->>> _remove_stops (arr,11,ID,C)
->>> matrix_without_stops
-matrix_without_stops( ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A'],
+    >>> arr = np.array([["T","G","A","A","A","A","A","A","A","T","G","A"], 
+                        ["A","A","A","A","A","A","T","G","A","A","A","A"], 
+                        ["A","A","A","A","A","A","T","G","A","A","A","A"],
+                        ["T","G","A","A","A","A","T","G","A","A","A","A"]])
+    >>> arr
+    array([['T', 'G', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A'],
+           ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A'],
+           ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A'],
+           ['T', 'G', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A']], 
+           dtype='|S1')
+    >>> _remove_stops (arr,11,ID,C)
+    >>> matrix_without_stops
+    matrix_without_stops( ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A'],
                       ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A']], 
                      dtype='|S1')
 
@@ -51,34 +56,39 @@ matrix_without_stops( ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A
     matrix_without_stops = np.delete(matrix,seqs_to_delete,0)
     return (matrix_without_stops,ID)
     
-def _remove_stops2(matrix,codontable_number):
+def _remove_stops2(matrix,codontable_number, ID, stops):
     """
 
-This function removes the columns that correspond to stop codons in a  nucleotide matrix.
-It walks through the sequences reading codons and if it finds a stop codon it adds the columns to a list.
-Finally, it removes the columns that appear in the list.
+    This function removes the columns that correspond to stop codons in a  nucleotide matrix.
+    It walks through the sequences reading codons and if it finds a stop codon it adds the columns to a list.
+    Finally, it removes the columns that appear in the list.
 
-Argument:
--matrix- nucleotide matrix from aligned sequences
--codontable_number- genetic code id from NCBI
+    Argument:
+    -matrix- nucleotide matrix from aligned sequences
+    -codontable_number- Codon Table from IUPAC
+    -ID- genetic code id from NCBI
+    -stops-
 
-Example:
+    Example:
 
->>> import numpy as np
->>> import Bio.Seq
->>> from Bio.Data import CodonTable
->>> arr = np.array([["T","G","A","A","A","A","A","A","A","T","G","A"], ["A","A","A","A","A","A","T","G","A","A","A","A"], ["A","A","A","A","A","A","T","G","A","A","A","A"], ["T","G","A","A","A","A","T","G","A","A","A","A"]])
->>> arr
-array([['T', 'G', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A'],
-       ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A'],
-       ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A'],
-       ['T', 'G', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A']], 
-      dtype='|S1')
->>> _remove_stops2 (arr,11,ID,D)
->>> matrix_without_stops
-matrix_without_stops([['A', 'A', 'A', 'A', 'A', 'A'],
-                      ['A', 'A', 'A', 'A', 'A', 'A']], 
-                     dtype='|S1')
+    >>> import numpy as np
+    >>> import Bio.Seq
+    >>> from Bio.Data import CodonTable
+    >>> arr = np.array([["T","G","A","A","A","A","A","A","A","T","G","A"], 
+                        ["A","A","A","A","A","A","T","G","A","A","A","A"], 
+                        ["A","A","A","A","A","A","T","G","A","A","A","A"], 
+                        ["T","G","A","A","A","A","T","G","A","A","A","A"]])
+    >>> arr
+    array([['T', 'G', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A'],
+           ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A'],
+           ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A'],
+           ['T', 'G', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A']], 
+           dtype='|S1')
+    >>> _remove_stops2 (arr,11,ID,D)
+    >>> matrix_without_stops
+    matrix_without_stops([['A', 'A', 'A', 'A', 'A', 'A'],
+                          ['A', 'A', 'A', 'A', 'A', 'A']], 
+                          dtype='|S1')
 
       
     """
