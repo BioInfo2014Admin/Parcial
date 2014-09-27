@@ -1,26 +1,26 @@
 def _gap_cleaner(matrix):
     
     """ This function removes gaps from nucleotide matrix.
-It walks through the sequences reading codons and if it finds a gap it adds the row number into a list.
-Finally, it removes the rows that appear in the list.
+    It walks through the sequences reading codons and if it finds a gap it adds the row number into a list.
+    Finally, it removes the rows that appear in the list.
+    
+    Argument:
+    -matrix- nucleotide matrix from alignment
+    
+    
+    Example:
+    >>> 
+    >>> _gap_cleaner (['A' 'C' 'C' 'A' 'G' 'T' 'T' 'G' 'C' 'A' 'T' 'T']
+                      ['A' 'C' 'C' '-' '-' '-' 'T' 'G' 'C' 'A' 'A' 'T']
+                      ['A' 'C' 'C' 'A' 'G' 'T' '-' '-' '-' 'A' 'A' 'T']
+                      ['A' 'C' 'C' 'A' 'G' '-' 'T' 'G' 'C' 'A' 'A' 'T'])
+     
+    (['A', 'C', 'C', 'A', 'T', 'T'],
+     ['A', 'C', 'C', 'A', 'A', 'T'],
+     ['A', 'C', 'C', 'A', 'A', 'T'],
+     ['A', 'C', 'C', 'A', 'A', 'T'])
 
-Argument:
--matrix- nucleotide matrix from alignment
-
-
-Example:
->>> gap_cleaner (['A' 'C' 'C' 'A' 'G' 'T' 'T' 'G' 'C' 'A' 'T' 'T']
- ['A' 'C' 'C' '-' '-' '-' 'T' 'G' 'C' 'A' 'A' 'T']
- ['A' 'C' 'C' 'A' 'G' 'T' '-' '-' '-' 'A' 'A' 'T']
- ['A' 'C' 'C' 'A' 'G' '-' 'T' 'G' 'C' 'A' 'A' 'T'])
- 
-(['A', 'C', 'C', 'A', 'T', 'T'],
-       ['A', 'C', 'C', 'A', 'A', 'T'],
-       ['A', 'C', 'C', 'A', 'A', 'T'],
-       ['A', 'C', 'C', 'A', 'A', 'T'])
-
-"""
-    def _gap_cleaner(matrix):
+    """
     import numpy as np
     gap_list = []
     flag="ok"
