@@ -31,6 +31,14 @@ def _gap_cleaner(matrix):
                 for k in matrix[i,j:j+3]:
                     if k !="-":
                         flag="warning"
+                         if flag=="warning":
+        print("Warning, cleaning the gaps will change the reading frame of the alignment."+"\n"+"What do you want to do?")
+        print(" -Continue erasing the whole codon['C']"+"\n"+" -Interrupt the program['I']")
+        ans=""
+            while ans!="C":
+                ans=input()
+                if ans=="I":
+                    raise Exception("End")
     matrix_without_gaps = np.delete(matrix,gap_list,1)
     return (matrix_without_gaps)
                         
