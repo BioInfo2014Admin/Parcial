@@ -26,7 +26,7 @@ def _remove_stops(matrix,codontable_number,ID,stops):
     >>> _remove_stops (arr,11,ID,C)
     >>> matrix_without_stops
     matrix_without_stops( ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A'],
-                      ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A']], 
+                          ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A']], 
                      dtype='|S1')
 
       
@@ -67,7 +67,7 @@ def _remove_stops2(matrix,codontable_number, ID, stops):
     -matrix- nucleotide matrix from aligned sequences
     -codontable_number- Codon Table from IUPAC
     -ID- genetic code id from NCBI
-    -stops-
+    -stops- stop codons
 
     Example:
 
