@@ -7,12 +7,15 @@ def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary
 	format. 
 
 	Input file must be .fasta or .phylip alignment sequences. The function has two
-	options to remove stops codons, the first one directly remove all the secuences 
-	with premature codons and the other remove all the secuence after the first stop
-	codon found. By default the funtion doesn't remove stop codons. The function also
-	has two ways to selects zones to keep and zones to eliminate . The first one is
-	introducing a sequence of "0" and "1" into the input file. The second way is 
-	introducing a list of tuples as an argument.
+	options to remove stops codons: the first one removes all the sequences 
+	with premature codons and the other one removes the entire sequence after the first stop
+	codon found. By default the function doesn't remove stop codons. The function has two
+	options to make the zone selection. The first one consists in the user introducing
+	a 0 and 1 sequence as a plane file text (-binary name.txt). In the second one the user 
+	must introduce a list of tuples which delimites the zones to be used. Finally, if the user 
+	wants the protein alignment(-protalign), the function will translate the codon alignment
+	with the option of choosing a desired codon table or leaving the default one. 
+	
 
 	Arguments:
 	-seqdir- alignment file 
@@ -21,8 +24,9 @@ def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary
 	-tupla- list of tuples for zone selection
 	-outputnamealign- protein alignment file name
 	-codon_table- genetic code number (http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi)
-	-stops- c or d. c removes all sequences with premature codons. d removes the nucleotides in
+	-stops- c or d. c removes all the sequences with premature stop codons. d removes the nucleotides in
 	 all sequences found after the first stop codon.
+	 
 
 	>>> parcial("./examples/example.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,None)
 	>>> parcial("./examples/example.fasta",True,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,None)
@@ -32,7 +36,7 @@ def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary
 	>>> parcial("./examples/example.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,"d")"""
 
 
-#aca importamos los todos los modulos
+#Here we import the modules
     from modules import Infile
     from modules import Selectingbyzones
     from modules import gap_cleaner
@@ -62,20 +66,20 @@ def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary
         raise Exception("wrong argument -stops: it should be c or d, instead it was "+str(stops))   
     ID = ID._ID(seqdir)
     array =Infile._input(seqdir)
-#enviamos al modulo que lo corta
+#We send it  to the cutting module
     
     interestarray = Selectingbyzones._zoneselector(array,tupla,binary)
     
-#enviamos al modulo que limpia gaps
+#We send it to the gap cleaner module
     
     nogapsarray = gap_cleaner._gap_cleaner(interestarray)
-#enviamos al modulo que limpia stops
+#We send it to the sotp codones cleaner module
     final = removestops._remove_stops(nogapsarray,codon_table,ID,stops)
-#cuando corresponda, generamos el alineamiento de proteinas
+#Ir returns the alignment protein, when necessary
     if protalign == True:
         arrayprotalign = alignproteins._Alignproteins(final[0],codon_table)   
 
-#transformamos al formato deseado por el user y lo enviamos a un archivo.
+#The user transforms it into the desired format and this is sent to a file
     
     outfile._outfile(final[0],outputname,final[1])
 
@@ -90,18 +94,18 @@ def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary
 
 if __name__ == "__main__":
     import argparse
-#estos sos los argumentos que cargara el programa
+#These are the arguments that the program will take in
 
-    parser = argparse.ArgumentParser(description='ACA VA LA DESCRIPCION DEL PROGRAMA')
+    parser = argparse.ArgumentParser(description='Here goes the description of the program'')
     parser.add_argument('-seqdir',  type=str, help='input name')
     parser.add_argument('-stops',  type=str, help='type of stops codons treatment')
-    parser.add_argument('-binarydir',  type=str, help='.txt que contiene una secuencia de 0 y 1 para seleccionar que zonas son de interes')
+    parser.add_argument('-binarydir',  type=str, help='.txt that contains a 0 and 1 sequence to select zones of interest')
     parser.add_argument('-protalign', action='store_const', const = True, default = False, help='if True will return cleaned protein aligment ')
     parser.add_argument('-outputname', type=str, help='output name', default = "parcial.fasta")
     parser.add_argument('-outputnamealign', type=str, help='output name for the protein aligment', default = "aligment.fasta")
-    parser.add_argument('-tupla', type=tuple, help='lista de tuplas que contiene las zonas de interes')
+    parser.add_argument('-tupla', type=tuple, help='tuple list containing the zones of interest')
     parser.add_argument('-codon_table', type=int, help='number of the codon table to use', default = 1)
-#esto carga los argumentos en una variable    
+#This fits the arguments into a variable    
     args = parser.parse_args()
-#esto envia los argumentos a la funcion parcial, coimo argumentos para la funcion.    
+#This sends the arguments to the function "parcial" as usable arguments for the function
     parcial(args.seqdir,args.protalign,args.outputname,args.tupla,args.outputnamealign,args.codon_table,args.binarydir,args.stops)
