@@ -17,12 +17,18 @@ def _outfile(m, n, ID):
     -ID- a list containing the aligned sequences IDs.
     
     Example:
-    >>>import sys
-    >>>import numpy as np
-    >>>import Bio
-    >>>from Bio import SeqIO
-    >>>import os
-    >>>outfile(matrix,"example.fasta",ID)"""
+    >>> my_alignment = np.array([["T","G","A"], ["A","A","A"]])
+    >>> my_alignment
+    array([['T', 'G', 'A'],
+           ['A', 'A', 'A']],
+          dtype='|S1')
+    >>> ID = ['ENSG0997','ENSG1233']
+    >>> import sys
+    >>> import numpy as np
+    >>> import Bio
+    >>> from Bio import SeqIO
+    >>> import os
+    >>> _outfile(my_alignment,"example.fasta",ID)"""
     
     sys.stdout = open (n, "w")
     
