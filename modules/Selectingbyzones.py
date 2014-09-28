@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-def _zoneselector(input_array, tuple_selection=None, selection_01=None):
+def _zoneselector(input_array, list_selection=None, selection_01=None):
     """
     The function receive an array and a selection of the zones of interest that want to be maintained in
     the output array of this algorithm. The selection can be made via tuple-selection or zero-one selection.
