@@ -1,4 +1,4 @@
-def _remove_stops(matrix,codontable_number,ID,stops):
+def _remove_stops1(matrix,codontable_number,ID,stops):
     """
 
     This function removes sequences with premature stops from nucleotide matrix.
@@ -23,7 +23,7 @@ def _remove_stops(matrix,codontable_number,ID,stops):
            ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A'],
            ['T', 'G', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A']], 
            dtype='|S1')
-    >>> _remove_stops (arr,11,ID,C)
+    >>> _remove_stops1 (arr,11,ID,C)
     >>> matrix_without_stops
     matrix_without_stops( ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A'],
                           ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A']], 
@@ -52,7 +52,8 @@ def _remove_stops(matrix,codontable_number,ID,stops):
             else:
                 pass
         counter = 0
-    ID.pop(seqs_to_delete)
+    for d in range(0,len(seqs_to_delete)):
+        ID.pop(d)
     matrix_without_stops = np.delete(matrix,seqs_to_delete,0)
     return (matrix_without_stops,ID)
     
@@ -109,9 +110,12 @@ def _remove_stops2(matrix,codontable_number, ID, stops):
     matrix_without_stops = np.delete(matrix,seqs_to_delete,1)
     return (matrix_without_stops)
     
-    if stops == "C":
-        _remove_stops(matrix,codontable_number,ID,stops)
-    elif stops == "D":
-        _remove_stops2(matrix,codontable_number,ID,stops)
+def _remove_stops(matrix,codontable_number,ID,stops):
+    if stops == "c":
+        final = _remove_stops1(matrix,codontable_number,ID,stops)
+        return final
+    elif stops == "d":
+        final = _remove_stops2(matrix,codontable_number,ID,stops)
+        return final
     elif stops == None:
         return (matrix,ID)
