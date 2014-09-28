@@ -8,9 +8,9 @@ def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary
 
 	Input file must be .fasta or .phylip alignment sequences. The function has two
 	options to remove stops codons: the first one removes all the sequences 
-	with premature codons and the other one removes the entire sequence after the first stop
-	codon found. By default the function doesn't remove stop codons. The function has two
-	options to make the zone selection. The first one consists in the user introducing
+	with more than one stop codon and the other one removes the position in all the sequences
+	where a stop codon is found. By default the function doesn't remove stop codons.
+	The function has two options to make the zone selection. The first one consists in the user introducing
 	a 0 and 1 sequence as a plane file text (-binary name.txt). In the second one the user 
 	must introduce a list of tuples which delimites the zones to be used. Finally, if the user 
 	wants the protein alignment(-protalign), the function will translate the codon alignment
@@ -24,8 +24,8 @@ def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary
 	-tupla- list of tuples for zone selection
 	-outputnamealign- protein alignment file name
 	-codon_table- genetic code number (http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi)
-	-stops- c or d. c removes all the sequences with premature stop codons. d removes the nucleotides in
-	 all sequences found after the first stop codon.
+	-stops- c or d. "c" removes all the sequences with premature stop codons. "d" removes the position
+	of the alignment where stops codons are found.
 	 
 
 	>>> parcial("./examples/example.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,None)
