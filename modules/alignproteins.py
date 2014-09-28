@@ -12,23 +12,20 @@ def _Alignproteins(NM,codtable):
     
     Example:
     
-    >>>from Bio.Data import CodonTable
-    >>>import Bio
-    >>>from Bio.Seq import Seq
-    >>>import numpy as np
-    >>>Alignproteinsmatrix=np.array([["A","C","T","G","C","A","C","G","A"],
-                                     ["T","G","A","A","C","G","A","G","G"]])
-    >>>_Alignproteins(Alignproteinsmatrix,11)
+    >>> import Bio
+    >>> from Bio.Data import CodonTable
+    >>> from Bio.Seq import Seq
+    >>> import numpy as np
+    >>> Alignproteinsmatrix=np.array([["A","C","T","G","C","A","C","G","A"], ["T","C","A","A","C","G","A","G","G"]])
+    >>> _Alignproteins(Alignproteinsmatrix,11)
     array([['T', 'A', 'R'],
-           ['W', 'T', 'R']], 
-           dtype='|S1')
-    
+           ['S', 'T', 'R']], 
+          dtype='|S1')
     """
     import Bio
     from Bio.Seq import Seq
     from Bio.Data import CodonTable
     import numpy as np
-    CodonTable.unambiguous_dna_by_id[codtable]
     lista2=[]
     for i in range (0,len(NM)):
         lista=[]
