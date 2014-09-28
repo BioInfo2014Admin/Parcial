@@ -4,16 +4,21 @@ from Bio import AlignIO
 
 def _ID(a):
 
-    """The function saves ids in a list.
+    r"""The function saves ids in a list.
     
     Arguments:
     -a- alignment file
     
     Example:
+    
+        >>> with open("alignment.fasta", "w") as alignment_file:
+    ...     alignment_file.write(">ENSG0997"+"\n"+"TGA"+"\n"+">ENSG1233"+"\n"+"AAA")  
     >>> import os
     >>> import numpy as np
     >>> from Bio import AlignIO
-    >>> _ID("example.fasta")"""
+    >>> ID = _ID("alignment.fasta")
+    >>> ID
+    ['ENSG0997','ENSG1233']"""
         
     fileName, fileExtension = os.path.splitext(a)
     
