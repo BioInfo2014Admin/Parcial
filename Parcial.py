@@ -75,6 +75,7 @@ def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary
     nogapsarray = gap_cleaner._gap_cleaner(interestarray)
 #We send it to the sotp codones cleaner module
     final = removestops._remove_stops(nogapsarray,codon_table,ID,stops)
+    
 #Ir returns the alignment protein, when necessary
     if protalign == True:
         arrayprotalign = alignproteins._Alignproteins(final[0],codon_table)   
@@ -96,7 +97,7 @@ if __name__ == "__main__":
     import argparse
 #These are the arguments that the program will take in
 
-    parser = argparse.ArgumentParser(description='Here goes the description of the program'')
+    parser = argparse.ArgumentParser(description='Here goes the description of the program')
     parser.add_argument('-seqdir',  type=str, help='input name')
     parser.add_argument('-stops',  type=str, help='type of stops codons treatment')
     parser.add_argument('-binarydir',  type=str, help='.txt that contains a 0 and 1 sequence to select zones of interest')
