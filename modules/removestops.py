@@ -63,7 +63,7 @@ def _remove_stops1(matrix,codontable_number, ID, stops):
             codon_2 = matrix[j,i:i+3]
             codon = codon_1.join(codon_2)
             if codon in ct.stop_codons:
-                seqs_to_delete.append(range(i,len(matrix[0])))
+                seqs_to_delete.extend(range(i,len(matrix[0])))
     matrix_without_stops = np.delete(matrix,seqs_to_delete,1)
     return (matrix_without_stops)
     
