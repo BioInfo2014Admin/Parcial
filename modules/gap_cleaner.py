@@ -7,7 +7,8 @@ def _gap_cleaner(matrix):
     Argument:
     -matrix- codon alignment matrix
     
-    Example:
+    Example: 
+    >>> import numpy as np
     >>> arr1=np.array([['A', 'C', 'C', 'A', 'G', 'T', 'T', 'G', 'C', 'A', 'T', 'T'],
                        ['A', 'C', 'C', '-', '-', '-', 'T', 'G', 'C', 'A', 'A', 'T'],
               	       ['A', 'C', 'C', 'A', 'G', 'T', '-', '-', '-', 'A', 'A', 'T'],
