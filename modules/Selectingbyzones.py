@@ -124,13 +124,7 @@ def _zoneselector(input_array, list_selection=None, selection_01=None):
             flag="error"
     if flag=="error":
         print("Warning, your selection affects the reading frame")
-        print("If you want to continue, the program will expand your selection to fit the reading frame")
-        print("Do you want to continue?[Y/N]")
-        ans=""
-        while ans!="Y":
-            ans=input()
-            if ans=="N":
-                raise Exception("End")
+        print("The program will expand your selection to fit the reading frame")
         for i in range(0,len(list_selection)):
             if list_selection[i][0]%3!=0:
                 s1=list_selection[i][0]%3
