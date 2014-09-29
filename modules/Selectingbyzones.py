@@ -79,9 +79,7 @@ def _zoneselector(input_array, list_selection=None, selection_01=None):
     import numpy as np
     if type(list_selection)==str:
         listlist=[]
-        M=list_selection[1:len(list_selection)-1].split('],[')
-        M[0]=M[0].replace('[','')
-        M[len(M)-1]=M[len(M)-1].replace(']','')
+        M=list_selection[2:len(list_selection)-2].split('],[')
         for i in M:
             S=i[0:len(i)].split(',')
             listlist.append(S)
