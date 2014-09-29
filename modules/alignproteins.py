@@ -16,7 +16,8 @@ def _Alignproteins(NM,codtable):
     >>> from Bio.Data import CodonTable
     >>> from Bio.Seq import Seq
     >>> import numpy as np
-    >>> Alignproteinsmatrix=np.array([["A","C","T","G","C","A","C","G","A"], ["T","C","A","A","C","G","A","G","G"]])
+    >>> Alignproteinsmatrix=np.array([["A","C","T","G","C","A","C","G","A"], 
+                                      ["T","C","A","A","C","G","A","G","G"]])
     >>> _Alignproteins(Alignproteinsmatrix,11)
     array([['T', 'A', 'R'],
            ['S', 'T', 'R']], 
