@@ -75,10 +75,10 @@ def _remove_stops2(matrix,codontable_number, ID, stops):
     >>> import numpy as np
     >>> import Bio.Seq
     >>> from Bio.Data import CodonTable
-    >>> arr = np.array([["T","","A","A","A","A","A","A","A","T","G","A"], 
+    >>> arr = np.array([["A","A","A","A","A","A","A","A","A","T","G","A"], 
                         ["A","A","A","A","A","A","T","G","A","A","A","A"], 
                         ["A","A","A","A","A","A","T","G","A","A","A","A"], 
-                        ["T","G","A","A","A","A","T","G","A","A","A","A"]])
+                        ["A","A","A","A","A","A","T","G","A","A","A","A"]])
     >>> arr
     array([['A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A'],
            ['A', 'A', 'A', 'A', 'A', 'A', 'T', 'G', 'A', 'A', 'A', 'A'],
