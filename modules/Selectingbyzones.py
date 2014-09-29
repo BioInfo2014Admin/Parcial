@@ -2,7 +2,7 @@
 def _zoneselector(input_array, list_selection=None, selection_01=None):
     """
     The function receive an array and a selection of the zones of interest that want to be maintained in
-    the output array of this algorithm. The selection can be made via tuple-selection or zero-one selection.
+    the output array of this algorithm. The selection can be made via list-selection or zero-one selection.
     
     Arguments:
     -input_array-      alignment matrix    
@@ -24,7 +24,7 @@ def _zoneselector(input_array, list_selection=None, selection_01=None):
            ['A', 'T', 'G', 'G', 'T', 'A']], 
           dtype='|S1')
 
-    Selecting zones using list of tuples. 
+    Selecting zones using list of lists. 
 
     >>> _zoneselector(input_array=arr,list_selection=[[0,3]])
     array([['A', 'T', 'G'],
@@ -40,16 +40,18 @@ def _zoneselector(input_array, list_selection=None, selection_01=None):
            ['G', 'T', 'A']], 
           dtype='|S1')
 
-    If your selection affects the reading frame, the program will let you know and will ask you whether to continue or not.
+    If your selection affects the reading frame, the program will let you know and will expand your selection to fit the reading frame. 
     
-    .>> _zoneselector(arr,[(0,2)])
+    >>> _zoneselector(arr,[[0,2]])
     Warning, your selection affects the reading frame
-    If you want to continue, the program will expand your selection to fit the reading frame
-    Do you want to continue?[Y/N]
+    The program will expand your selection to fit the reading frame
+    array([['A', 'T', 'G'],
+           ['A', 'T', 'G']], 
+          dtype='|S1')
 
     You can't use both selection methods!
 
-    >>> _zoneselector(input_array=arr,tuple_selection=[(0,3)],selection_01="zeros.txt")
+    >>> _zoneselector(input_array=arr,list_selection=[[0,3]],selection_01="zeros.txt")
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
       File "<stdin>", line 51, in _zoneselector
