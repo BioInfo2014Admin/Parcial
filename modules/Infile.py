@@ -4,16 +4,23 @@ from Bio import AlignIO
 
 def _input(a):
 
-    """The function converts alignments to matrix for further use.
+    r"""The function converts alignments to matrix for further use.
   
     Arguments:
     -a- alignment file
     
     Example:
-    >>>import os
-    >>>import numpy as np
-    >>>from Bio import AlignIO
-    >>>_input("example.fasta")"""
+    
+    >>> with open("alignment.fasta", "w") as alignment_file:
+    ...     alignment_file.write(">ENSG0997"+"\n"+"TGA"+"\n"+">ENSG1233"+"\n"+"AAA")  
+    >>> import os
+    >>> import numpy as np
+    >>> from Bio import AlignIO
+    >>> alignment_array = _input("alignment.fasta")
+    >>> alignment_array
+    array([['T', 'G', 'A'],
+           ['A', 'A', 'A']], 
+          dtype='|S1')"""
         
     fileName, fileExtension = os.path.splitext(a)
     
