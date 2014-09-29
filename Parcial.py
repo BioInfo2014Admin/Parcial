@@ -99,8 +99,8 @@ if __name__ == "__main__":
     parser.add_argument('-binarydir',  type=str, help='.txt that contains a 0 and 1 sequence to select zones of interest')
     parser.add_argument('-protalign', action='store_const', const = True, default = False, help='if True will return cleaned protein aligment ')
     parser.add_argument('-outputname', type=str, help='output name', default = "parcial.fasta")
-    parser.add_argument('-outputnamealign', type=str, help='output name for the protein aligment', default = "aligment.fasta")
-    parser.add_argument('-tupla', type=str, help='tuple list containing the zones of interest')
+    parser.add_argument('-outputnamealign', type=str, help='output name for the protein alignment', default = "alignment.fasta")
+    parser.add_argument('-tupla', type=str, help='list of lists containing the zones of interest')
     parser.add_argument('-codon_table', type=int, help='number of the codon table to use', default = 1)
 #This fits the arguments into a variable    
     args = parser.parse_args()
