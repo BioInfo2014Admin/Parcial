@@ -52,8 +52,15 @@ def _remove_stops1(matrix,codontable_number,ID,stops):
             else:
                 pass
         counter = 0
-    for d in range(0,len(seqs_to_delete)):
-        ID.pop(d)
+    seqs_to_delete.sort(reverse=True)
+    new=[]
+    for i in seqs_to_delete:
+        if i not in new:
+            new.append(i)
+    for i in new:
+        ID.pop(i)
+    #for d in range(0,len(seqs_to_delete)):
+    #    ID.pop(d)
     matrix_without_stops = np.delete(matrix,seqs_to_delete,0)
     return (matrix_without_stops,ID)
     
