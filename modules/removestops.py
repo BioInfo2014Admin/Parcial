@@ -113,7 +113,7 @@ def _remove_stops2(matrix,codontable_number, ID, stops):
             if codon in ct.stop_codons:
                 columns_to_delete.extend(range(i,len(matrix[0])))
     matrix_without_stops = np.delete(matrix,columns_to_delete,1)
-    return (matrix_without_stops)
+    return (matrix_without_stops, ID)
     
 def _remove_stops(matrix,codontable_number,ID,stops):
     if stops == "c":
