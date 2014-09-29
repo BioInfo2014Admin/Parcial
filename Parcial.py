@@ -10,8 +10,9 @@ def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary
 	options to remove stops codons: the first one removes all the sequences 
 	with more than one stop codon and the other one removes the position in all the sequences
 	where a stop codon is found. By default the function doesn't remove stop codons.
-	The funtion can select portions of the secuence, this can be done by introducing
-	a 0 and 1 sequence as a plane file text (-binary name.txt). Finally, if the user 
+	The function has two options to make the zone selection. The first one consists in the user introducing
+	a 0 and 1 sequence as a plane file text (-binary name.txt). In the second one the user 
+	must introduce a list of tuples which delimites the zones to be used. Finally, if the user 
 	wants the protein alignment(-protalign), the function will translate the codon alignment
 	with the option of choosing a desired codon table or leaving the default one. 
 	
@@ -20,7 +21,7 @@ def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary
 	-seqdir- alignment file 
 	-protalign- protein alignment
 	-outputname- exit file name
-	
+	-tupla- list of tuples for zone selection
 	-outputnamealign- protein alignment file name
 	-codon_table- genetic code number (http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi)
 	-stops- c or d. "c" removes all the sequences with premature stop codons. "d" removes the position
@@ -29,7 +30,7 @@ def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary
 
 	>>> parcial("./examples/example.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,None)
 	>>> parcial("./examples/example.fasta",True,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,None)
-	
+	>>> parcial("./examples/example.fasta",False,"alineamiento.fasta",[(0,9),(27,30)],"alineamientoprot.fasta",1,None,None)
 	>>> parcial("./examples/example.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,"./examples/binary.txt",None)
 	>>> parcial("./examples/example.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,"c")
 	>>> parcial("./examples/example.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,"d")"""
@@ -43,11 +44,11 @@ def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary
     from modules import alignproteins
     from modules import outfile
     from modules import ID
- 
-
     
-   
-    
+    if type(tupla) == list or tupla == None:
+        pass
+    else:
+	raise Exception("wrong argument -tupla: it should be for example [(0,3),(9,12)] , instead it was "+str(tupla))
     if binary == None or "." in binary:
 	pass
     else:
@@ -103,11 +104,9 @@ if __name__ == "__main__":
     parser.add_argument('-protalign', action='store_const', const = True, default = False, help='if True will return cleaned protein aligment ')
     parser.add_argument('-outputname', type=str, help='output name', default = "parcial.fasta")
     parser.add_argument('-outputnamealign', type=str, help='output name for the protein aligment', default = "aligment.fasta")
-    parser.add_argument('-tupla', type=str, help='tuple list containing the zones of interest')
+    parser.add_argument('-tupla', type=tuple, help='tuple list containing the zones of interest')
     parser.add_argument('-codon_table', type=int, help='number of the codon table to use', default = 1)
 #This fits the arguments into a variable    
-   
     args = parser.parse_args()
-    args.tupla = None
 #This sends the arguments to the function "parcial" as usable arguments for the function
     parcial(args.seqdir,args.protalign,args.outputname,args.tupla,args.outputnamealign,args.codon_table,args.binarydir,args.stops)
