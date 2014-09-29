@@ -10,8 +10,8 @@ def _ID(a):
     
     Example:
     
-        >>> with open("alignment.fasta", "w") as alignment_file:
-    ...     alignment_file.write(">ENSG0997"+"\n"+"TGA"+"\n"+">ENSG1233"+"\n"+"AAA")  
+    >>> with open("alignment.fasta", "w") as alignment_file:
+    ...    alignment_file.write(">ENSG0997"+"\n"+"TGA"+"\n"+">ENSG1233"+"\n"+"AAA")  
     >>> import os
     >>> from Bio import AlignIO
     >>> ID = _ID("alignment.fasta")
