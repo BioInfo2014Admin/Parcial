@@ -75,6 +75,16 @@ def _zoneselector(input_array, list_selection=None, selection_01=None):
 
     """
     import numpy as np
+    if type(list_selection)==str:
+        listlist=[]
+        for i in range(1,len(list_selection)-1,6):
+            A=list_selection[i+1:i+4]
+            B=A.split(',')
+            listlist.append(B)
+        for i in range(len(listlist)):
+            for j in range(2):
+                listlist[i][j]=int(listlist[i][j])
+        list_selection=listlist
     if list_selection==None and selection_01==None:
         return(input_array)
     elif list_selection!=None and selection_01!=None:
