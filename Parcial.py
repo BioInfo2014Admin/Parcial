@@ -23,8 +23,8 @@ def parcial(seqdir,protalign,outputname,tupla,outputnamealign,codon_table,binary
 	
 	-outputnamealign- protein alignment file name
 	-codon_table- genetic code number (http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi)
-	-stops- c or d. "c" removes all the sequences with premature stop codons. "d" removes the position
-	of the alignment where stops codons are found.
+	-stops- c or d. "c" removes all the sequences with premature stop codons. "d" removes the columns of the aligment
+	that follows stop codons, including that codon.
 	 
 
 	>>> parcial("./examples/example.fasta",False,"alineamiento.fasta",None,"alineamientoprot.fasta",1,None,None)
